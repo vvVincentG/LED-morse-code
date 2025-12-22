@@ -1,14 +1,13 @@
 # LED-morse-code
 
-__WIP__
+__*WIP*__
 
-Text Interface in python
-
-You input words into a textbox and it translates that into morse code
-
-Using an Aurdino it connects and makes the LED blink based on what you inputed into the textbox
+This project makes an LED blink a morse code message. You input words into a popup box on your computer and it makes the LED blink the morse code equivalent
 
 __Hardware__
-<img width="1342" height="626" alt="Image" src="https://github.com/user-attachments/assets/ae12e9cd-8bdd-4a80-bfc0-cf2cea2f178c" />
-Using an Arduino Uno R3, a 220ohm Resistor, and an LED
+<img width="1482" height="692" alt="Image" src="https://github.com/user-attachments/assets/cd2c3806-2af7-4068-9006-2583d6b2bc9c" />
+Using an Arduino Uno R3, a 220ohm Resistor, an LED, and a breadboard.
 
+__Software__  
+C++ and Arduino Library for making the LED Blink  
+Python for User Interface
