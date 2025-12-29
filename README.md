@@ -10,4 +10,4 @@ Using an Arduino Uno R3, a 220ohm Resistor, an LED, and a breadboard.
 
 __Software__  
 C++ and Arduino Library for making the LED Blink  
-Python for User Interface
+Input your line into the Serial Terminal (No special characters, only letters and spaces) and LED will blink
