@@ -45,14 +45,26 @@ void setup()
 {
   // put your setup code here, to run once:
   pinMode(pin13, OUTPUT);
+
+  Serial.begin(9600);
+  Serial.println("Input sentence to be turned into morse code!");
+  Serial.println("DO NOT INPUT SPECIAL CHARACTERS, ONLY LETTERS AND SPACES");
 }
 
 void loop() 
 {
   // put your main code here, to run repeatedly:
-  //Serial.begin(9600); //debugging (is it one or 2 g?)
-  translateMorse("hi sos"); //STRING CANNOT HAVE ANY CHARACTERS ONLY LETTERS AND SPACE or else everything breaks :sob:
+  Serial.println("Please input a new sentence now, press enter when you're done");
 
+  //User will stay in the while loop until they inputted words
+  while(Serial.available() == 0)
+  {
+  }
+
+  //STRING CANNOT HAVE ANY CHARACTERS ONLY LETTERS AND SPACE or else everything breaks :sob:
+  String usersInput = Serial.readStringUntil('\n');
+  translateMorse(usersInput); 
+  
 }
 
 // define function here:
@@ -77,6 +89,7 @@ void letterGap()
   //3 timings between each letter of a word but we already have one timing at the end of a dot/dash 
   //so add 2 timings, 250 + (2*250) or 250 + 500
   delay(500); 
+  Serial.print(' ');
 }
 
 void wordGap()
@@ -84,6 +97,7 @@ void wordGap()
   //7 timings between each letter of a word but we already have one timing at the end of a dot/dash 
   //so add 6 timings, 250 + (6*250) or 250 + 1500
   delay(1500);
+  Serial.print('\n');
 }
 
 void translateMorse(String sentence)
@@ -97,11 +111,11 @@ void translateMorse(String sentence)
     char letter = sentence[i];
 
     //Checks if theres a space
-    if (letter == ' ')
+    if (letter == ' ' || letter == '\n') //Checks if theres a space
     {
       wordGap();
     }
-    else 
+    else if (isalpha(letter))//checks if its a letter, isalpha is a prebuilt function that does that
     {
       //C++ reads 'A' as 1 and the rest of the letters of the alphabet as numbers, as long as the letter is uppercase and in ' '
       //ex: 'A'=1, 'B'=2, 'C'=3,...,'Z'=26
@@ -113,8 +127,8 @@ void translateMorse(String sentence)
       //Run another For Loop to read each individual dot/dash and play its function
       for (size_t j = 0; j < morseCode.length(); j++)
       {
+        Serial.print(morseCode[j]);
         //checks if that character is a dot .
-        Serial.println(morseCode[j]);
         if (morseCode[j] == '.')
         {
           dot();
@@ -124,10 +138,14 @@ void translateMorse(String sentence)
         {
           dash();
         }
-        
       }
+      Serial.print(letter);
       letterGap();
 
+    }
+    else //everything else is a special character
+    {
+      Serial.println(letter);
     }
 
   }
